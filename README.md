@@ -17,3 +17,4 @@ Pointers to Reinfocement Learning
 ## Notes/Papers/Surveys
 
 * [CS229 Lecture Notes by Andrew Ng](https://sgfin.github.io/files/notes/CS229_Lecture_Notes.pdf) (check the last chapter)
+* [Patterns, predictions, and actions: Foundations of machine learning by Moritz Hardt and Benjamin Recht, Chapter 12](https://mlstory.org/rl.html), [pdf](https://mlstory.org/pdf/rl.pdf)
