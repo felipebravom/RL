@@ -277,7 +277,14 @@ $R((4,3)) = +1$ \\
 $R((4,2)) = -1$ \\
 $R(S) = -0.02$ for all other states.
 
-\item All other transitions have a reward of –0.02 (to avoid the robot wasting time).
+\item All other transitions have a reward of –0.02 
+\item This is common in navigation tasks to charge the robot for fuel comsumption and to (to avoid the robot wasting time).
+
+\item We will also assume that the robot stops when it reaches states $(4,3)$ or $(4,2)$.
+
+\item These terminal states can be modelled by adding an extra state in which transitions from these terminal states are made with probability 1 and the agent loops forever in this new state with no more rewards.
+
+\item 
 
 \end{itemize}
 
@@ -285,6 +292,65 @@ $R(S) = -0.02$ for all other states.
 } 
 
 \end{frame}
+
+
+\begin{frame}{Policy}
+\scriptsize
+\begin{itemize}
+    \item A policy is any function \( \pi : S \to A \), mapping states to actions.
+    \item We say that we are executing some policy \( \pi \) if, whenever we are in state \( s \), we take action \( a = \pi(s) \).
+  \item The ``optimal policy'' for the previous example would be:
+
+  \begin{figure}[h]
+        	\includegraphics[scale = 0.6]{pics/example2.png}
+        \end{figure}
+      
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Policy}
+\scriptsize
+\begin{itemize}
+\item So when you execute this policy this will maximize your expected value of the total payoffs.
+
+\item It is worth noting that the action of going west (left) from state $(3,1)$ is not trivial, since going north would bring the agent closer to the goal.
+\item However, entering state $(3,2)$ adds the danger of ending up in state $(4,2)$.
+\item Therefore, the optimal solution favored the longer and less risky path. 
+
+\end{itemize}
+
+
+\end{frame}
+
+
+\begin{frame}{Value Function}
+\scriptsize
+\begin{itemize}
+    \item  For any policy \( \pi \), we define the value function $V^{\pi}: \mathbb{S} \rightarrow \mathbb{R}$ as:
+    \[
+    V^{\pi}(s) = \mathbb{E}\left[R(s_0) + \gamma R(s_1) + \gamma^2 R(s_2) + \cdots \;\middle|\; s_0 = s, \pi\right].
+    \]
+    \item \( V^{\pi}(s) \) is the expected sum of discounted rewards (or total payoff) starting in state \( s \) and executing policy \( \pi \).
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Value Function}
+\scriptsize
+\begin{itemize}
+    \item  The following examples shows a pretty bad policy \( \pi \) than seems to be heading to -1 rather than +1 in most cases:
+\begin{figure}[h]
+        	\includegraphics[scale = 0.4]{pics/example3.png}
+        \end{figure}
+    \item The value function \( V^{\pi}(s) \) for this policy is as follows:
+    
+\begin{figure}[h]
+        	\includegraphics[scale = 0.4]{pics/example4.png}
+        \end{figure}
+\end{itemize}
+\end{frame}
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[allowframebreaks]\scriptsize
