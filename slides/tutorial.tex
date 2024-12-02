@@ -351,6 +351,27 @@ $R(S) = -0.02$ for all other states.
 
 
 
+\begin{frame}{Bellman Equation}
+\scriptsize
+\begin{itemize}
+    \item Given a fixed policy \( \pi \), its value function \( V^{\pi} \) satisfies the Bellman equation:
+    \[
+    V^{\pi}(s) = R(s) + \gamma \sum_{s' \in S} P_{s\pi(s)}(s') V^{\pi}(s').
+    \]
+    \item This states that the expected sum of discounted rewards \( V^{\pi}(s) \) for starting in state \( s \) consists of two terms:
+    \begin{enumerate}
+        \item The immediate reward \( R(s) \) obtained immediately upon being in state \( s \), and
+        \item The expected sum of future discounted rewards.
+    \end{enumerate}
+    \item Examining the second term more closely, the summation can be rewritten as \( \mathbb{E}_{s' \sim P_{s\pi(s)}}[V^{\pi}(s')] \).
+    \item This represents the expected value of the discounted rewards starting in state \( s' \), where \( s' \) is distributed according to \( P_{s\pi(s)} \)—the probability distribution over the states we transition to after taking the action \( \pi(s) \) in the MDP from state \( s \).
+    \item Thus, the second term gives the expected sum of discounted rewards obtained after the first step in the MDP.
+\end{itemize}
+\end{frame}
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[allowframebreaks]\scriptsize
