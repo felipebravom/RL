@@ -284,8 +284,6 @@ $R(S) = -0.02$ for all other states.
 
 \item These terminal states can be modelled by adding an extra state in which transitions from these terminal states are made with probability 1 and the agent loops forever in this new state with no more rewards.
 
-\item 
-
 \end{itemize}
 
 
@@ -323,18 +321,23 @@ $R(S) = -0.02$ for all other states.
 \end{frame}
 
 
-\begin{frame}{Value Function}
+\begin{frame}{Value and Value-Action Functions}
 \scriptsize
 \begin{itemize}
-    \item  For any policy \( \pi \), we define the value function $V^{\pi}: \mathbb{S} \rightarrow \mathbb{R}$ as:
+    \item  For any policy \( \pi \), we define the value function $V^{\pi}: S \rightarrow \mathbb{R}$ as:
     \[
     V^{\pi}(s) = \mathbb{E}\left[R(s_0) + \gamma R(s_1) + \gamma^2 R(s_2) + \cdots \;\middle|\; s_0 = s, \pi\right].
     \]
     \item \( V^{\pi}(s) \) is the expected sum of discounted rewards (or total payoff) starting in state \( s \) and executing policy \( \pi \).
+       \item  Similarly, we can define the action value function $q^{\pi}: S\times A \rightarrow \mathbb{R}$ as:
+    \[
+    Q^{\pi}(s,a) = \mathbb{E}\left[R(s_0) + \gamma R(s_1) + \gamma^2 R(s_2) + \cdots \;\middle|\; s_0 = s,a_0=a, \pi\right].
+    \]
+    \item In the action-value function, for each state and action pair, the action-value function outputs the expected return if the agent starts in that state, takes that action, and then follows the policy forever after.
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Value Function}
+\begin{frame}{Value Function Example}
 \scriptsize
 \begin{itemize}
     \item  The following examples shows a pretty bad policy \( \pi \) than seems to be heading to -1 rather than +1 in most cases:
@@ -359,7 +362,7 @@ $R(S) = -0.02$ for all other states.
     V^{\pi}(s) = R(s) + \gamma \sum_{s' \in S} P_{s\pi(s)}(s') V^{\pi}(s').
     \]
     \item This states that the expected sum of discounted rewards \( V^{\pi}(s) \) for starting in state \( s \) consists of two terms:
-    \begin{enumerate}
+    \begin{enumerate}\scriptsize
         \item The immediate reward \( R(s) \) obtained immediately upon being in state \( s \), and
         \item The expected sum of future discounted rewards.
     \end{enumerate}
@@ -369,6 +372,35 @@ $R(S) = -0.02$ for all other states.
 \end{itemize}
 \end{frame}
 
+
+\begin{frame}{Bellman Equation Explained}
+\scriptsize
+\begin{itemize}
+\item Start with the Definition of \( V^\pi(s) \):
+\[
+V^{\pi}(s) = \mathbb{E}\left[ R(s_0) + \gamma R(s_1) + \gamma^2 R(s_2) + \cdots \;\middle|\; s_0 = s, \pi \right].
+\]
+
+    \item The first term in the expectation corresponds to the immediate reward \( R(s) \). The subsequent terms capture the future rewards starting from the next state:
+\[
+V^\pi(s) = R(s) + \gamma \mathbb{E}\left[V^\pi(s_1) \;\middle|\; s_0 = s, \pi\right].
+\]
+
+\item The expectation over the next state \( s_1 \) is computed using the state transition probabilities \( P_{s\pi(s)}(s') \). Hence:
+\[
+\mathbb{E}[V^\pi(s_1) | s_0 = s, \pi] = \sum_{s' \in S} P_{s\pi(s)}(s') V^\pi(s').
+\]
+
+\item This satisfies the definition of expected value because we are calculating the weighted average of the value function \( V^\pi(s_1) \) over all possible next states \( s' \) where the  weights are given by the probabilities of transitioning to those states under the given policy \( \pi \). 
+
+\item Substituting this back into the equation gives:
+\[
+V^\pi(s) = R(s) + \gamma \sum_{s' \in S} P_{s\pi(s)}(s') V^\pi(s').
+\]
+
+
+\end{itemize}
+\end{frame}
 
 
 
