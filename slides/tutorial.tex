@@ -403,6 +403,29 @@ V^\pi(s) = R(s) + \gamma \sum_{s' \in S} P_{s\pi(s)}(s') V^\pi(s').
 \end{frame}
 
 
+\begin{frame}{Example: Computing the Value Function}
+\scriptsize
+\begin{itemize}
+\item Suppose the policy at state \( (3, 1) \) prescribes the action north (\( N \)), i.e., \( \pi((3, 1)) = N \).
+\item The value function for this state is:
+\[
+V^\pi\big((3, 1)\big) = R\big((3, 1)\big) + \gamma \Big( 
+    0.8 \times V^\pi\big((3, 2)\big) + 
+    0.1 \times V^\pi\big((4, 1)\big) + 
+    0.1 \times V^\pi\big((2, 1)\big) 
+\Big).
+\]
+
+\item For every state in the Markov Decision Process (MDP), a similar equation can be written.
+\item Each value \( V^\pi(s) \) represents an unknown variable.
+\item In this example, there are \( 11 \) states, leading to \( 11 \) linear equations.
+\item Solving these equations yields the value function \( V^\pi(s) \) for all states.
+
+\end{itemize}
+\end{frame}
+
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
